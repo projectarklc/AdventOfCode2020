@@ -1,6 +1,7 @@
-import { day04 } from './days';
+import {day05} from './days';
 
 
 
-day04.functionB();
-//day03.functionB();
+day05.functionA();
+day05.functionB();
+

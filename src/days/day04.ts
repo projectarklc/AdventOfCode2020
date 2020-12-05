@@ -64,6 +64,10 @@ export class day04 {
     let pid = false;
     data.forEach(item => {
       // console.log(item.length);
+      /**
+       *  Next time: const eyColors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'] thanks to Bill for the 
+       * suggestion 
+       */
       if(item.length !== 0) { // not an empty line
         const line = item.split(' ');
         line.forEach(lineItem => {
@@ -83,8 +87,9 @@ export class day04 {
             break;
           case 'ecl':
             value = kvPair[1].trim();
+            /** To use solution commented above:  if(eyColors.includes(kvPair[1].trim())) { */
             if(value === 'amb' || value === 'blu' || value === 'brn' || value === 'gry' || value === 'grn' ||
-             value === 'hzl' || value === 'oth') {
+              value === 'hzl' || value === 'oth') {
               ecl = true;
             }
             break;
