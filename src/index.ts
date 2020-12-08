@@ -1,7 +1,7 @@
-import {day07} from './days';
+import {day08} from './days';
 
 
 
-day07.functionA();
-day07.functionB();
+day08.functionA();
+//day07.functionB();
 
