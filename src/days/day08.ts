@@ -1,4 +1,3 @@
-import { sign } from 'crypto';
 import { FileUtilities } from '../services/fileUtilities';
 
 const data = FileUtilities.returnTextAsString('day08.txt');
