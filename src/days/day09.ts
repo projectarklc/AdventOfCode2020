@@ -20,8 +20,7 @@ export class day09 {
       let adds = false;
       for (let i = 0; i < rollingArray.length; i++) {
         rollingArray.forEach(item => {
-          if(item + rollingArray[i] === count) {
-            console.log(`found ${item}  and ${rollingArray[i]} = ${item + rollingArray[i]}.  Looking for ${count}`);
+          if(item + rollingArray[i] === dataArray[count]) {
             adds = true;
             return adds;     
           }
@@ -37,9 +36,52 @@ export class day09 {
         rollingArray.push(data[counter]);
         rollingArray.shift();
       } else {
-        console.log(rollingArray, counter);
+        console.log(dataArray[counter]);
       }
     } while (matched === true);
   }
 
+  public static functionB() {
+    const numberToMatch = 373803594; // Output from puzzle 1
+    let index = 0;
+    let total = 0;
+    let tempIndex= index;
+    let itemArray: number[] = [];
+    function addToTotal(sum: number): number {
+      const tempIndex = index;
+      return sum + dataArray[tempIndex];
+    }
+    do {
+      
+      do {
+        
+        total += addToTotal(tempIndex);
+        if(total === numberToMatch) {
+          console.log('FOUND IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+          break;
+        }
+        if(total > numberToMatch) {
+          index++;
+          tempIndex = index;
+          itemArray = [];
+          total = 0;
+        } else {
+          tempIndex++;
+          itemArray.push(dataArray[tempIndex]);
+        }
+        console.log(total, index);
+      } while (total < numberToMatch);
+
+      //total = addToTotal(index);
+
+      console.log(total);
+      // if(total > numberToMatch) {
+      //   index++;
+      // } else{
+      //   tempIndex++;
+      // }
+      
+    } while (total !== numberToMatch);
+    console.log(total, itemArray[0], itemArray[itemArray.length]);
+  }
 }
