@@ -41,47 +41,39 @@ export class day09 {
     } while (matched === true);
   }
 
-  public static functionB() {
+  public static functionB(): void {
     const numberToMatch = 373803594; // Output from puzzle 1
     let index = 0;
     let total = 0;
-    let tempIndex= index;
+    let tempIndex = 0;
     let itemArray: number[] = [];
-    function addToTotal(sum: number): number {
-      const tempIndex = index;
-      return sum + dataArray[tempIndex];
-    }
     do {
-      
-      do {
-        
-        total += addToTotal(tempIndex);
-        if(total === numberToMatch) {
-          console.log('FOUND IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-          break;
-        }
-        if(total > numberToMatch) {
-          index++;
-          tempIndex = index;
-          itemArray = [];
-          total = 0;
-        } else {
-          tempIndex++;
-          itemArray.push(dataArray[tempIndex]);
-        }
-        console.log(total, index);
-      } while (total < numberToMatch);
-
-      //total = addToTotal(index);
-
-      console.log(total);
-      // if(total > numberToMatch) {
-      //   index++;
-      // } else{
-      //   tempIndex++;
-      // }
-      
+    //  console.log(total);
+      if(total < numberToMatch) {
+        itemArray.push(dataArray[tempIndex]);
+        total += dataArray[tempIndex];
+        tempIndex++;
+      }
+      else if(total > numberToMatch) {
+        index++;
+        tempIndex = index;
+        itemArray = [];
+        total = 0;
+      //  itemArray.push(dataArray[index]);
+      } else if( total === numberToMatch) {
+        itemArray.sort((a, b) => a - b);
+        console.log('FOUND IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      }
     } while (total !== numberToMatch);
-    console.log(total, itemArray[0], itemArray[itemArray.length]);
+    console.log(itemArray.length);
+    itemArray.sort();
+    let tv = 0;
+    for (let i=0; i < itemArray.length; i++) {
+      console.log(`Adding  to ${itemArray[i]} for a total of ${tv + itemArray[i]}`);
+      tv += itemArray[i];
+      
+    }
+    console.log(itemArray);
+    console.log(total, itemArray[0], itemArray[itemArray.length -1], itemArray[0] + itemArray[itemArray.length - 1]);
   }
 }
