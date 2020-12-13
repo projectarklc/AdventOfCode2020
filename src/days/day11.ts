@@ -12,31 +12,69 @@ export class day11 {
   
   private static initializeArray() {
     const seatingArray = [];
-    for (let i = 0; i < dataArray.length; ++i) {
+    //let changed = false;
+    for (let column = 0; column < dataArray.length; ++column) {
       const horizontalArray: string[] = [];
       let horizontalPosition = 0;
       do {
-        const value = dataArray[i][horizontalPosition];
-        //   if(value === 'L') {
-        //     value = '#';
-        //   } else {
-        //     value = '.';
-        //   }
+        let value = dataArray[column][horizontalPosition];
+  
         horizontalArray.push(value);
         horizontalPosition++;
-      } while (horizontalPosition < dataArray[i].length);
+      } while (horizontalPosition < dataArray[column].length);
       seatingArray.push(horizontalArray);
     }
-    return new Array(seatingArray);
+    return seatingArray;
   }
 
   public static functionA(): void {
     // eslint-disable-next-line prefer-const
-    let seatingArray = day11.initializeArray;
-
+    let changed = false
+    let seatingArray = day11.initializeArray();
+    let tempArray: string[][] = []
+    do {
+      for(let row = 0; row < seatingArray.length; row++) {
+        let rowArray = []
+        for(let column = 0; column < seatingArray[row].length; column++) {
+          let value = seatingArray[row][column]
+         // console.log(value, column, row)
+         if(value !== '.') {
+          if(value === 'L') {
+            // console.log(value)
+            if(row > 0 && row < (seatingArray.length -1 ) && column > 0 && column < (seatingArray[row].length -1) ) {
+              if(seatingArray[row - 1][column -1] !== '#' && seatingArray[row - 1][column] !== '#' &&
+               seatingArray[ row - 1][column + 1] !== '#' && seatingArray[ row ][column - 1] !== '#' &&
+               seatingArray[row][column + 1] !== '#' && seatingArray[row + 1][column - 1] !== '#' &&
+               seatingArray[row + 1][column] !== '#' && seatingArray[row + 1][column] + 1 !== '#') {
+               rowArray[column] = '#'; 
+               } else if(row === 0 && column === 0) {
+                 if(seatingArray[row][column] + 1 !== '')  {}
+              } else {
+                rowArray[column] = 'L'
+              }
+            } else{
+              rowArray[column] = 'L'
+            }
+           //  seatingArray[row][column] = '#';
+             changed = true
+           } else   if(value = '.') {
+               rowArray[column] = '.'
+             } else {
+               rowArray[column] = 'L'
+             }
+         }
+          
+            
+          
+        }
+        tempArray.push(rowArray)
+      }
+      seatingArray = tempArray
+      
+    } while (!changed);
 
     
-    console.log(seatingArray[0]);
+    console.log(seatingArray);
   }
   
 }
